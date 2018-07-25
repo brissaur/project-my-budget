@@ -1,0 +1,2 @@
+- different icon based on type
+- better UX add 
