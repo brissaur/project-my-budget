@@ -1,0 +1,13 @@
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+  min-width: 200px;
+}
+
+.submit-button {
+  /* */
+}

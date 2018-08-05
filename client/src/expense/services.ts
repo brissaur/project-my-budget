@@ -3,7 +3,7 @@ export function formatCurrency(value: number): string | null {
     return null;
   }
 
-  const sign = value < 0 ? "-" : "+";
+  const sign = value < 0 ? "" : "+";
 
   return `${sign}${value}€`;
 }

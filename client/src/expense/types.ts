@@ -12,6 +12,8 @@ export interface IExpense {
 export interface IExpenseForm {
   type: string;
   value: number;
+  description?: string;
+  date: string;
 }
 
 export type deleteFunction = (expense: IExpense) => void;

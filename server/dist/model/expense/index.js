@@ -14,7 +14,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = __importDefault(require("mongodb"));
 const database_1 = __importDefault(require("../../database"));
 const validate_1 = __importDefault(require("./validate"));
-console.log(database_1.default);
 function create(rawExpense = {}) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('create', rawExpense);
@@ -36,7 +35,6 @@ function get() {
 }
 function remove(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        throw new Error();
         const a = yield (yield database_1.default).collection('Expense').deleteOne({ _id: new mongodb_1.default.ObjectID(id) });
         console.log(a);
     });

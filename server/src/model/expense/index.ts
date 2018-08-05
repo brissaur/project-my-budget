@@ -13,8 +13,6 @@ export interface Expense {
   currency: string;
 }
 
-console.log(db);
-
 async function create(rawExpense: any = {}): Promise<Expense> {
   console.log('create', rawExpense);
   const input = {
@@ -39,7 +37,6 @@ async function get(): Promise<Expense[]> {
 }
 
 async function remove(id: string): Promise<void> {
-  throw new Error();
   const a = await (await db).collection('Expense').deleteOne({ _id: new mongodb.ObjectID(id) });
   console.log(a);
 }
