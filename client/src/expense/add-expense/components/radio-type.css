@@ -1,0 +1,12 @@
+.radio-type {
+  padding: 5px;
+
+  cursor: pointer;
+}
+
+.radio-type:hover,
+.active-radio-type {
+  color: #3f51b5;
+  background-color: lightgrey;
+  border-radius: 100px;
+}
