@@ -1,22 +1,21 @@
-import * as React from "react";
-import "./styles.css";
-// import TextField from "@material-ui/core/TextField";
-// import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import CardMedia from "@material-ui/core/CardMedia";
-// import Button from "@material-ui/core/Button";
-// import Typography from "@material-ui/core/Typography";
-import { createFunction, IExpenseForm } from "../types";
+import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import * as moment from "moment";
-import { Button } from "@material-ui/core";
+import * as React from "react";
 
-const now = moment().format("YYYY-MM-DD");
-global.console.log("Date.now()", now);
+import { createFunction, IExpenseForm } from "../types";
+import RadioTypes from "./components/radio-types";
+import { formatDecimalNumberFromEvent } from "./services";
+import "./styles.css";
 
 interface IProps {
   onCreate: createFunction;
+}
+
+type func<T> = (...params: any[]) => T;
+
+function gof<G = any, F = any>(g: func<G>, f: func<F>) {
+  return (...params: any[]) => g(f(...params));
 }
 
 class AddExpense extends React.Component {
@@ -29,9 +28,9 @@ class AddExpense extends React.Component {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      description: "not defined",
-      type: "?",
-      value: 1
+      description: undefined,
+      type: undefined,
+      value: undefined
     };
   }
 
@@ -45,6 +44,10 @@ class AddExpense extends React.Component {
   };
 
   public handleChange = (fieldName: string) => {
+    return (value: any) => this.setState({ [fieldName]: value });
+  };
+
+  public handleEventChange = (fieldName: string) => {
     return (e: any) => this.setState({ [fieldName]: e.target.value });
   };
   public render() {
@@ -57,14 +60,15 @@ class AddExpense extends React.Component {
           id="value"
           label="value"
           type="number"
-          onChange={this.handleChange("value")}
+          onChange={gof(
+            this.handleChange("value"),
+            formatDecimalNumberFromEvent
+          )}
           value={this.state.value}
+          autoFocus={true}
         />
-        <TextField
-          className="text-field"
-          required={true}
-          id="type"
-          label="type"
+
+        <RadioTypes
           onChange={this.handleChange("type")}
           value={this.state.type}
         />
@@ -73,7 +77,7 @@ class AddExpense extends React.Component {
           required={true}
           id="description"
           label="description"
-          onChange={this.handleChange("description")}
+          onChange={this.handleEventChange("description")}
           value={this.state.description}
         />
         <Button
