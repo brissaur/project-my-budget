@@ -55,5 +55,5 @@ app.delete('/expense/:id', async (req, res) => {
   }
 });
 
-const PORT = 4000;
+const PORT = +process.env.PORT || 4000;
 app.listen(PORT, 'localhost', () => global.console.log(`Server listening on port ${PORT}`));
