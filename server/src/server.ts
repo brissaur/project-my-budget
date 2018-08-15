@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.send('hello world - 2');
 });
 
 app.get('/expense', async (req, res) => {
