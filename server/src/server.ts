@@ -1,7 +1,11 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+import bodyParser from 'body-parser';
 import Expense from './model/expense';
+
 
 const app = express();
 app.use(bodyParser.json());
