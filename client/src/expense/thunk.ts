@@ -22,15 +22,18 @@ const formatExpense = ({
     id: _id
   } as IExpense);
 
+const BASE_API_URL = process.env.REACT_APP_API_HOST || "";
+const computeUrl = (path: string) => `${BASE_API_URL}${path}`;
+
 export async function fetchExpenses() {
-  const response = await axios.get("/expense");
+  const response = await axios.get(computeUrl("/expense"));
 
   return response.data.map(formatExpense);
 }
 
 export async function postExpenses(expense: IExpenseForm): Promise<IExpense> {
   try {
-    const response = await axios.post("/expense", expense);
+    const response = await axios.post(computeUrl("/expense"), expense);
     global.console.log(response);
     return formatExpense(response.data);
   } catch (e) {
@@ -41,7 +44,7 @@ export async function postExpenses(expense: IExpenseForm): Promise<IExpense> {
 
 export async function deleteExpenses(expense: IExpense) {
   try {
-    const response = await axios.delete("/expense/" + expense.id);
+    const response = await axios.delete(computeUrl("/expense/" + expense.id));
     global.console.log(response);
   } catch (e) {
     global.console.error(e);
